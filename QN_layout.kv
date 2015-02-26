@@ -9,7 +9,7 @@
 			AnchorLayout:
 				size_hint_y: .25
 				anchor_y: 'top'
-				anchor_x: 'right'
+				anchor_x: 'right'		
 				Button:
 					text: 'Add HP Set'
 					size_hint_y: .75
@@ -20,7 +20,8 @@
 				size_hint_y: 1
 				id: thebuttonbox
 				orientation: 'horizontal'
-				
+
+
     TabbedPanelItem:
         text: 'Quick\nReference'
 
@@ -32,22 +33,22 @@
 		BoxLayout:
 			orientation: 'horizontal'
 			Button:
-				background_color: [255,0,0,1]
+				text: 'R'
 				on_press: root.change_color('red')
 			Button:
-				background_color: [0,255,0,1]
+				text: 'G'
 				on_press: root.change_color('green')
 			Button:
-				background_color: [0,0,255,1]
+				text: 'B'
 				on_press: root.change_color('blue')
 			Button:
-				background_color: [255,255,0,1]
+				text: 'Y'
 				on_press: root.change_color('yellow')
 			Button:
-				background_color: [0.93,0.25,0.4,1]
+				text: 'M'
 				on_press: root.change_color('maroon')
 			Button:
-				foreground_color: [0.49,0,1,0.5]
+				text: 'P'
 				on_press: root.change_color('purple')
 		Monster_name:
 			id: mons_name
