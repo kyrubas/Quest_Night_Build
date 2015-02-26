@@ -1,0 +1,80 @@
+<Main_Window>:
+    do_default_tab: False
+    tab_width: 125
+    tab_height: 75
+    TabbedPanelItem:
+        text: 'HP'
+		BoxLayout:
+			orientation: 'vertical'
+			AnchorLayout:
+				size_hint_y: .25
+				anchor_y: 'top'
+				anchor_x: 'right'
+				Button:
+					text: 'Add HP Set'
+					size_hint_y: .75
+					size_hint_x: None
+					width: 100
+					on_press: root.add_buttons()
+			Button_box:
+				size_hint_y: 1
+				id: thebuttonbox
+				orientation: 'horizontal'
+				
+    TabbedPanelItem:
+        text: 'Quick\nReference'
+
+    TabbedPanelItem:
+        text: 'Sound Bard'  
+<Hp_adder>:
+	BoxLayout:
+		orientation: 'vertical'
+		BoxLayout:
+			orientation: 'horizontal'
+			Button:
+				background_color: [255,0,0,1]
+				on_press: root.change_color('red')
+			Button:
+				background_color: [0,255,0,1]
+				on_press: root.change_color('green')
+			Button:
+				background_color: [0,0,255,1]
+				on_press: root.change_color('blue')
+			Button:
+				background_color: [255,255,0,1]
+				on_press: root.change_color('yellow')
+			Button:
+				background_color: [0.93,0.25,0.4,1]
+				on_press: root.change_color('maroon')
+			Button:
+				foreground_color: [0.49,0,1,0.5]
+				on_press: root.change_color('purple')
+		Monster_name:
+			id: mons_name
+			text:'Monster Name'
+			focus: True
+			size_hint_y: 1.5
+			size_hint_x: 1
+			font_size: self.height*(1/4)
+			padding_y: (self.height-self.line_height)/4
+			foreground_color: [0,0,0,1]
+		Hp_label:
+			id: theinput
+			text: '0'
+			font_size: self.height
+			size_hint_y: 1
+			size_hint_x: 1
+		Hp_plus:
+			id: plus
+			text: '+'
+			font_size: self.height
+			on_press: root.add_hp()
+			size_hint_y: 1
+			size_hint_x: 1	
+		Hp_minus:
+			id: minus
+			text: '-'
+			font_size: self.height
+			on_press: root.take_hp()
+			size_hint_y: 1
+			size_hint_x: 1		
