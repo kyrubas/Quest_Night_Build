@@ -9,6 +9,8 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.textinput import TextInput
 
+import os
+
 class Hp_adder(RelativeLayout):
     def __init__(self, **kwargs):
         self.hp = 0
@@ -25,14 +27,18 @@ class Hp_adder(RelativeLayout):
         label = self.ids['theinput']
         label.text = str(self.hp)
 
+    def coldec(self,red_val,green_val,blue_val,alpha_val = 255):
+        return [red_val/255, green_val/255, blue_val/255, alpha_val/255]
+
     def change_color(self,but_id):
-        color_dict={'white': [1,1,1,1],
-                    'red':[1,0,0,1],
-                    'blue':[0,0,1,1],
-                    'yellow':[1,1,0,1],
-                    'green':[0,1,0,1],
-                    'maroon':[1,0.5,0.4,1],
-                    'purple':[0.49,0,1,1]}
+        color_dict={'white':  self.coldec(255,255,255),
+                    'red':    self.coldec(255,0,0),
+                    'blue':   self.coldec(0,128,255),
+                    'yellow': self.coldec(164,160,44),
+                    'green':  self.coldec(0,170,0),
+                    'maroon': self.coldec(110,35,35),
+                    'purple': self.coldec(126,33,152)}
+
         self.color = color_dict[but_id]
         mons_name = self.ids['mons_name']
         mons_name.foreground_color = self.color
