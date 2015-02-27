@@ -9,7 +9,9 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.textinput import TextInput
 
-import os
+from kivy.core.audio import SoundLoader
+from kivy.clock import Clock
+
 
 class Hp_adder(RelativeLayout):
     def __init__(self, **kwargs):
@@ -65,15 +67,74 @@ class Monster_name(TextInput):
     color = [0,0,0,1]
     pass
 
+class TimerBox(BoxLayout):
+    pass
+
+class The_timer(RelativeLayout):
+    def __init__(self):
+        self.myseconds = 0
+        self.myminutes = 0
+
+    def count_up(self):
+        if self.myseconds + 1 < 60:
+            self.myseconds += 1
+        else:
+            self.myseconds = 0
+            self.myminutes += 1
+
+    def reset_timer(self):
+        self.myseconds = 0
+        self.myminutes = 0
+            
+class SoundBards:
+    def __init__(self):
+        self.pewpewsound = SoundLoader.load('Pew_Pew.wav')
+        self.boingsound = SoundLoader.load('boing_poing.wav')
+        
+    def pew(self):
+        self.pewpewsound.play()
+    def boing(self):
+        self.boingsound.play()
+        
 class Main_Window(TabbedPanel):       
+    soundbard = SoundBards()
+    thetimer = The_timer()
+
     def add_buttons(self, **args):
         hp_adder = Hp_adder()
         butbox = self.ids['thebuttonbox']
         butbox.add_widget(hp_adder)
-    
+    def pew(self):
+        self.soundbard.pew()
+    def boing(self):
+        self.soundbard.boing()
+
+    def iter_clock(self,dt):
+        self.thetimer.count_up()
+        the_secs = self.ids['clocksec']
+        the_mins = self.ids['clockmin']        
+        the_secs.text = str(self.thetimer.myseconds)
+        the_mins.text = str(self.thetimer.myminutes)
+
+    def start_timer(self):
+        try:
+            Clock.unschedule(self.iter_clock)
+        except:
+            pass
+        Clock.schedule_interval(self.iter_clock,1)
+
+    def stop_timer(self):
+        Clock.unschedule(self.iter_clock)
+
+    def reset_timer(self):
+        self.thetimer.reset_timer()
+        the_secs = self.ids['clocksec']
+        the_mins = self.ids['clockmin']        
+        the_secs.text = str(self.thetimer.myseconds)
+        the_mins.text = str(self.thetimer.myminutes)
+        
 class QN_layout(App):
     def build(self):
-
         return Main_Window()
 
 if __name__=='__main__':
