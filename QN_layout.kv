@@ -4,29 +4,99 @@
     tab_height: 75
     TabbedPanelItem:
         text: 'HP'
+		id: tabpan
 		BoxLayout:
+			id: box1
 			orientation: 'vertical'
+			TimerBox:
+				id: timebox
+				orientation: 'horizontal'
+				Label:
+					text: 'MM:SS'
+					font_size: 50
+					size_hint_y: 1
+					size_hint_x: .15
+
+				Label:
+					id: clockmin
+					text: '0'
+					font_size: 50
+					size_hint_y: 1
+					size_hint_x: None
+					width: self.width
+				Label:
+					text: ':'
+					font_size: 50
+					size_hint_y: 1
+					size_hint_x: None
+					width: self.width*.1
+				Label:
+					id: clocksec
+					text: '0'
+					font_size: 50
+					size_hint_y: 1
+					size_hint_x: None
+					width: self.width
+				Button:
+					text: 'Start'
+					font_size: 20
+					on_press: root.start_timer()
+					size_hint_y: 1
+					size_hint_x: None
+					width: self.width
+				Button:
+					text: 'Pause'
+					font_size: 20
+					on_press: root.stop_timer()
+					size_hint_y: 1
+					size_hint_x: None
+					width: self.width
+				Button:
+					text: 'Reset'
+					font_size: 20
+					on_press: root.reset_timer()
+					size_hint_y: 1
+					size_hint_x: None
+					width: self.width						
 			AnchorLayout:
-				size_hint_y: .25
+				size_hint_y: .75
 				anchor_y: 'top'
-				anchor_x: 'right'		
+				anchor_x: 'center'		
 				Button:
 					text: 'Add HP Set'
-					size_hint_y: .75
+					size_hint_y: 1
 					size_hint_x: None
 					width: 100
 					on_press: root.add_buttons()
 			Button_box:
-				size_hint_y: 1
+				size_hint_y: 4
 				id: thebuttonbox
 				orientation: 'horizontal'
+				spacing: 5
 
 
     TabbedPanelItem:
         text: 'Quick\nReference'
 
     TabbedPanelItem:
-        text: 'Sound Bard'  
+        text: 'Sound Bard'
+		BoxLayout:
+			orientation: 'vertical'
+			size_hint_y: .25
+			anchor_x: 'right'
+			anchor_y: 'top'
+			Button:
+				text: 'Pew!'
+				size_hint_x: None
+				size_hint_y: .75
+				width: 100
+				on_press: root.pew()
+			Button:
+				text: 'Boing!'
+				size_hint_x: None
+				size_hint_y: .75
+				width: 100
+				on_press: root.boing()
 <Hp_adder>:
 	BoxLayout:
 		orientation: 'vertical'
@@ -34,21 +104,39 @@
 			orientation: 'horizontal'
 			Button:
 				text: 'R'
+				color: root.coldec(255,0,0)
+				font_size: self.height * (1/2)
+				bold: True
 				on_press: root.change_color('red')
 			Button:
 				text: 'G'
+				color: root.coldec(0,170,0)
+				font_size: self.height * (1/2)
+				bold: True
 				on_press: root.change_color('green')
 			Button:
 				text: 'B'
+				color: root.coldec(0,128,255)
+				font_size: self.height * (1/2)
+				bold: True
 				on_press: root.change_color('blue')
 			Button:
 				text: 'Y'
+				color: root.coldec(164,160,44)
+				font_size: self.height * (1/2)
+				bold: True
 				on_press: root.change_color('yellow')
 			Button:
 				text: 'M'
+				color: root.coldec(110,35,35)
+				font_size: self.height * (1/2)
+				bold: True
 				on_press: root.change_color('maroon')
 			Button:
 				text: 'P'
+				color: root.coldec(126,33,152)
+				font_size: self.height * (1/2)
+				bold: True
 				on_press: root.change_color('purple')
 		Monster_name:
 			id: mons_name
@@ -78,4 +166,4 @@
 			font_size: self.height
 			on_press: root.take_hp()
 			size_hint_y: 1
-			size_hint_x: 1		
+			size_hint_x: 1
